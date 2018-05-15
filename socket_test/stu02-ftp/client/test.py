@@ -27,11 +27,14 @@ import os
 #     else:
 #         print(allfile)
 
-file_size = os.path.getsize('Qt5Widgets.dll')
-file_size_int = int(file_size)
-with open('Qt5Widgets.dll','rb') as f:
-    while file_size_int >0:
-        print(file_size_int)
-        print(f.read(1024))
-        file_size_int -= 1024
-print("Finished")
+# file_size = os.path.getsize('Qt5Widgets.dll')
+# file_size_int = int(file_size)
+# with open('Qt5Widgets.dll','rb') as f:
+#     while file_size_int >0:
+#         print(file_size_int)
+#         print(f.read(1024))
+#         file_size_int -= 1024
+# print("Finished")
+
+
+print(os.listdir())

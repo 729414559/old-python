@@ -33,15 +33,11 @@ class FtpUpload:
             return False
 
     def upload_files(self,file_name):
-        # for n in os.listdir():
-        #     if n in file_path:
-        # file_path = os.path.relpath(file_name)
         def getallfiles(path):
             alldir = []
             allfile = []
             for dirpath, dirname, filename in os.walk(path):
                 for dir in dirname:
-                    # allfile.append(os.path.join(dirpath,dir))
                     alldir.append(os.path.join(dirpath, dir))
                 for name in filename:
                     allfile.append(os.path.join(dirpath, name))
@@ -109,6 +105,12 @@ class FtpUpload:
             send_dir(allfile, alldir)
             send_file(allfile, alldir)
 
+    def remote_dir(self):
+        self.sk.sendall(bytes("lls|0|null|null|null",encoding='utf-8'))
+        remote_bytes = self.sk.recv(1024)
+        remote_str = str(remote_bytes,encoding='utf-8')
+        print(remote_str)
+
     def choose_files(self):
         while True:
             temp_str = input("请选择操作：[help 帮助]")
@@ -134,7 +136,7 @@ class FtpUpload:
                 file_path = os.path.relpath(command[1])
                 self.upload_files(file_path)
             elif command[0].strip() == "lls":
-                print("查看远程目录")
+                self.remote_dir()
             elif command[0].strip() == "wget" and command[1].strip() != '':
                 print("下载远程文件到本地")
             else:
