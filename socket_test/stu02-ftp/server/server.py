@@ -89,11 +89,6 @@ def ftp_receive(conn):
             for dir in file_path_list:
                 os.mkdir(dir)
             conn.sendall(bytes('目录创建完成 %s' % file_path, encoding='utf-8'))
-
-        elif hander == "lls":
-            root_path = os.listdir()
-            root_path_str = str(root_path)
-            conn.sendall(bytes(root_path,encoding='utf-8'))
 if __name__ == '__main__':
     server = socketserver.ThreadingTCPServer(('127.0.0.1',8000),MyServer)
     server.serve_forever()
